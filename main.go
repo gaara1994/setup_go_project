@@ -55,6 +55,7 @@ func main() {
 		"internal/utils",
 		"pkg/errors",
 		"pkg/logger",
+		"proto",
 		"routes/api/v1",
 		"routes/api/v2",
 		"routes/api/docs",
@@ -73,8 +74,8 @@ func main() {
 	// 创建空文件
 	filesToTouch := []string{
 		"config/config.go",
-		"internal/db/models/base_model.go",
 		"internal/db/models/user.go",
+		"internal/db/migration/migration.go",
 		"internal/messaging/consumer.go",
 		"internal/messaging/producer.go",
 		"internal/messaging/producer_test.go",
@@ -141,7 +142,6 @@ func main() {
 			}
 		}
 	}
-
 
 }
 

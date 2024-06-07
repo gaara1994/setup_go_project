@@ -28,6 +28,8 @@ type PostgresDBConfig struct {
 	Password string `toml:"password"`
 	DBName   string `toml:"dbname"`
 	SSLMode  string `toml:"sslmode"`
+	MaxOpen  int `toml:"max_open"`
+	MaxIdle  int `toml:"max_idle"`
 }
 
 // MySQLConfig 代表MySQL数据库配置
@@ -39,6 +41,8 @@ type MySQLConfig struct {
 	DBName   string `toml:"dbname"`
 	Charset  string `toml:"charset,omitempty"` // 可选，默认值可省略
 	SSLMode  string `toml:"sslmode,omitempty"` // 可选，默认或根据需要设置
+	MaxOpen  int `toml:"max_open"`
+	MaxIdle  int `toml:"max_idle"`
 }
 
 // RedisCacheConfig 代表Redis缓存配置
