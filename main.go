@@ -16,6 +16,10 @@ func main() {
 	fmt.Print("请输入要创建的项目名: ")
 	fmt.Scanln(&dirName)
 
+	var template string
+	fmt.Print("是否使用模板文件: y/n")
+	fmt.Scanln(&template)
+
 	// 检查目录是否已存在
 	if _, err := os.Stat(dirName); !os.IsNotExist(err) {
 		log.Fatalf("目录 '%s' 已经存在。", dirName)
@@ -102,18 +106,6 @@ func main() {
 
 		{"go", "get", "-u", "github.com/spf13/cobra@latest"},
 		{"cobra-cli", "init"},
-		//{"go", "get", "-u", "github.com/gin-gonic/gin"},
-		//{"go", "get", "-u", "gorm.io/gorm"},
-		//{"go", "get", "-u", "gorm.io/driver/postgres"},
-		//{"go", "get", "-u", "gorm.io/driver/mysql"},
-		//{"go", "get", "-u", "gorm.io/driver/sqlite"},
-		//{"go", "get", "-u", "gorm.io/driver/sqlserver"},
-		//{"go", "get", "-u", "github.com/redis/go-redis"},
-		//{"go", "get", "-u", "github.com/IBM/sarama"},
-		//{"go", "get", "-u", "go.uber.org/zap"},
-		//{"go", "get", "-u", "go.uber.org/zap/zapcore"},
-		//{"go", "get", "-u", "github.com/prometheus/client_golang/prometheus"},
-		//{"go", "get", "-u", "github.com/prometheus/client_golang/prometheus/promauto"},
 
 		//拷贝模板文件
 		{"cp", "../template/config.toml", "./"},
@@ -129,22 +121,27 @@ func main() {
 		{"cp", "../template/client.go", "./internal/redis"},
 		{"cp", "../template/client_test.go", "./internal/redis"},
 		{"cp", "../template/main.go", "./"},
+		{"cp", "../template/Makefile", "./"},
+		{"cp", "../template/Dockerfile", "./"},
 
 		{"go", "mod", "tidy"},
 	}
 
-	for _, cmdArgs := range commands {
-		cmd := exec.Command(cmdArgs[0], cmdArgs[1:]...)
-		cmd.Dir = projectPath // 为每条命令都设置相同的工作目录
+	if template == "y" {
+		for _, cmdArgs := range commands {
+			cmd := exec.Command(cmdArgs[0], cmdArgs[1:]...)
+			cmd.Dir = projectPath // 为每条命令都设置相同的工作目录
 
-		output, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Printf("执行命令失败: %v, 错误信息: %s\n", cmd.Args, err)
-			log.Printf("命令输出: %s\n", output)
-		} else {
-			log.Printf("命令 '%s' 执行成功\n", strings.Join(cmd.Args, " "))
+			output, err := cmd.CombinedOutput()
+			if err != nil {
+				log.Printf("执行命令失败: %v, 错误信息: %s\n", cmd.Args, err)
+				log.Printf("命令输出: %s\n", output)
+			} else {
+				log.Printf("命令 '%s' 执行成功\n", strings.Join(cmd.Args, " "))
+			}
 		}
 	}
+
 
 }
 
