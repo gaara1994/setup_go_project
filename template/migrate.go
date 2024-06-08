@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"shop/config"
-	"shop/internal/db/models"
+	"app/config"
+	"app/internal/db/models"
 )
 var DB *gorm.DB
 

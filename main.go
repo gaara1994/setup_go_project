@@ -17,7 +17,7 @@ func main() {
 	fmt.Scanln(&dirName)
 
 	var template string
-	fmt.Print("是否使用模板文件: y/n")
+	fmt.Print("是否使用模板文件: y/n:	")
 	fmt.Scanln(&template)
 
 	// 检查目录是否已存在
@@ -38,6 +38,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("替换包名失败 '%s': %v", dirName, err)
 	}
+	_ = replaceInFile("./template/migrate.go", "app", dirName)
 
 	// 使用绝对路径进行后续操作
 	projectPath, _ := filepath.Abs(dirName)
@@ -73,20 +74,6 @@ func main() {
 
 	// 创建空文件
 	filesToTouch := []string{
-		"config/config.go",
-		"internal/db/models/user.go",
-		"internal/db/migration/migration.go",
-		"internal/messaging/consumer.go",
-		"internal/messaging/producer.go",
-		"internal/messaging/producer_test.go",
-		"internal/redis/client.go",
-		"internal/redis/client_test.go",
-
-		"pkg/errors/errors.go",
-		"pkg/logger/logger.go",
-		"routes/healthcheck.go",
-		"config.toml",
-		"log/app.log",
 		"main.go",
 		"Dockerfile",
 		"Makefile",
@@ -118,7 +105,8 @@ func main() {
 		{"cp", "../template/consumer.go", "./internal/messaging/"},
 		{"cp", "../template/producer.go", "./internal/messaging/"},
 		{"cp", "../template/producer_test.go", "./internal/messaging/"},
-
+		{"cp", "../template/user.go", "./internal/db/models/"},
+		{"cp", "../template/migrate.go", "./internal/db/migration/"},
 		{"cp", "../template/client.go", "./internal/redis"},
 		{"cp", "../template/client_test.go", "./internal/redis"},
 		{"cp", "../template/main.go", "./"},
