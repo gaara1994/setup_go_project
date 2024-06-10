@@ -52,6 +52,7 @@ func main() {
 		"internal/middleware",
 		"internal/redis",
 		"internal/dao",
+		"internal/controller",
 		"internal/service",
 		"internal/utils",
 		"pkg/errors",
