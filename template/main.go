@@ -22,6 +22,8 @@ func main() {
 		log.Fatalf(err.Error())
 	}
 
+	//设置模式
+	gin.SetMode(config.Config.Server.Mode)
 	// 启动HTTP服务器
 	r := gin.Default()
 	routes.InitRoutes(r)

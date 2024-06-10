@@ -16,6 +16,7 @@ var Config MainConfig
 type ServerConfig struct {
 	Address      string `toml:"address"`
 	Port         int    `toml:"port"`
+	Mode         string `toml:"mode"`
 	ReadTimeout  int    `toml:"read_timeout"`
 	WriteTimeout int    `toml:"write_timeout"`
 }
