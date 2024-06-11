@@ -46,7 +46,6 @@ func main() {
 	// 创建多级目录
 	dirsToCreate := []string{
 		"config",
-		"internal/db/migration",
 		"internal/db/models",
 		"internal/messaging",
 		"internal/middleware",
@@ -107,7 +106,7 @@ func main() {
 		{"cp", "../template/producer.go", "./internal/messaging/"},
 		{"cp", "../template/producer_test.go", "./internal/messaging/"},
 		{"cp", "../template/user.go", "./internal/db/models/"},
-		{"cp", "../template/migrate.go", "./internal/db/migration/"},
+		{"cp", "../template/migrate.go", "./internal/db/"},
 		{"cp", "../template/client.go", "./internal/redis"},
 		{"cp", "../template/client_test.go", "./internal/redis"},
 		{"cp", "../template/main.go", "./"},
